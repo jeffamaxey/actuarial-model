@@ -79,9 +79,7 @@ class GmwbBenefit(
 
                 break
 
-        withdrawal_rate = withdrawal_rate_table[0][lookup_key]
-
-        return withdrawal_rate
+        return withdrawal_rate_table[0][lookup_key]
 
     @use_latest_value
     def av_active_withdrawal_rate(
@@ -100,12 +98,10 @@ class GmwbBenefit(
 
         withdrawal_rate_table = self.cache[rider_name]['av_active']
 
-        withdrawal_rate = self._withdrawal_rate(
+        return self._withdrawal_rate(
             withdrawal_rate_table=withdrawal_rate_table,
-            age_first_withdrawal=age_first_withdrawal
+            age_first_withdrawal=age_first_withdrawal,
         )
-
-        return withdrawal_rate
 
     @use_latest_value
     def av_exhaust_withdrawal_rate(
@@ -124,9 +120,7 @@ class GmwbBenefit(
 
         withdrawal_rate_table = self.cache[rider_name]['av_exhausted']
 
-        withdrawal_rate = self._withdrawal_rate(
+        return self._withdrawal_rate(
             withdrawal_rate_table=withdrawal_rate_table,
-            age_first_withdrawal=age_first_withdrawal
+            age_first_withdrawal=age_first_withdrawal,
         )
-
-        return withdrawal_rate

@@ -41,19 +41,15 @@ class IndexedAccount(
             account_name=self.account_data_source.account_name
         ) * 12
 
-        crediting_terms = get_xversaries(
+        if crediting_terms := get_xversaries(
             issue_date=self.data_sources.model_point.issue_date,
             start_date=self.init_t,
             end_date=self.time_steps.t,
-            frequency=self.crediting_term_months
-        )
-
-        if crediting_terms:
-
+            frequency=self.crediting_term_months,
+        ):
             term_start_date = max(crediting_terms)
 
         else:
-
             term_start_date = self.data_sources.model_point.issue_date
 
         self.term_start_date = ProjectionValue(

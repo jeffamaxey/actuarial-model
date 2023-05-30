@@ -107,29 +107,25 @@ class ProjectionParameters:
                 fp=json_file
             )
 
-        projection_parameters = ProjectionParameters(
+        return ProjectionParameters(
             start_t=date(
                 year=int(json_payload['start_year']),
                 month=int(json_payload['start_month']),
-                day=int(json_payload['start_day'])
+                day=int(json_payload['start_day']),
             ),
             projection_length=relativedelta(
                 years=int(json_payload['projection_years']),
                 months=int(json_payload['projection_months']),
-                days=int(json_payload['projection_days'])
+                days=int(json_payload['projection_days']),
             ),
             time_step=relativedelta(
                 years=int(json_payload['time_step_years']),
                 months=int(json_payload['time_step_months']),
-                days=int(json_payload['time_step_days'])
+                days=int(json_payload['time_step_days']),
             ),
             resource_dir_path=json_payload['resource_dir_path'],
             output_dir_path=json_payload['output_dir_path'],
-            processing_type=ProcessingType(
-                json_payload['processing_type']
-            ),
+            processing_type=ProcessingType(json_payload['processing_type']),
             projection=json_payload['projection'],
-            data_source=json_payload['data_source']
+            data_source=json_payload['data_source'],
         )
-
-        return projection_parameters

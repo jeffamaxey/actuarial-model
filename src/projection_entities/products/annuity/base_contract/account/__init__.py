@@ -124,55 +124,43 @@ class Account(
         t2: date = None
     ) -> List[Premium]:
 
-        if t2 is None:
-
-            premiums = [
+        return (
+            [
                 Premium(
                     time_steps=self.time_steps,
                     data_sources=self.data_sources,
                     account_id=self.account_data_source.id,
-                    premium_data_source=premium_data_source
-                ) for premium_date, premium_data_source in self.account_data_source.premiums.items
+                    premium_data_source=premium_data_source,
+                )
+                for premium_date, premium_data_source in self.account_data_source.premiums.items
                 if t1 == premium_date
             ]
-
-        else:
-
-            premiums = [
+            if t2 is None
+            else [
                 Premium(
                     time_steps=self.time_steps,
                     data_sources=self.data_sources,
                     account_id=self.account_data_source.id,
-                    premium_data_source=premium_data_source
-                ) for premium_date, premium_data_source in self.account_data_source.premiums.items
+                    premium_data_source=premium_data_source,
+                )
+                for premium_date, premium_data_source in self.account_data_source.premiums.items
                 if t1 < premium_date <= t2
             ]
-
-        return premiums
+        )
 
     def _calc_total_premium(
         self
     ) -> float:
 
-        return sum(
-            [subpay.premium_amount for subpay in self.premiums]
-        )
+        return sum(subpay.premium_amount for subpay in self.premiums)
 
     def _calc_surrender_charge(
         self
     ) -> float:
 
-        surrender_charge = sum(
-            [subpay.surrender_charge for subpay in self.premiums]
-        )
+        surrender_charge = sum(subpay.surrender_charge for subpay in self.premiums)
 
-        surrender_charge = min(
-            surrender_charge,
-            self.account_value,
-            key=compare_latest_value
-        )
-
-        return surrender_charge
+        return min(surrender_charge, self.account_value, key=compare_latest_value)
 
     def process_premiums(
         self
@@ -208,7 +196,7 @@ class Account(
 
             # Calculate new premium total
             self.premium_new[self.time_steps.t] = sum(
-                [subpay.premium_amount for subpay in new_premiums]
+                subpay.premium_amount for subpay in new_premiums
             )
 
             # Update values

@@ -61,16 +61,10 @@ class TimeSteps:
         self
     ) -> date:
 
-        if self._index < len(self._time_steps) - 1:
-
-            self._index += 1
-            t = self.t
-
-            return t
-
-        else:
-
+        if self._index >= len(self._time_steps) - 1:
             raise StopIteration
+        self._index += 1
+        return self.t
 
     @property
     def min_t(
