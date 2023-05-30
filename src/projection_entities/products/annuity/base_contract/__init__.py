@@ -260,45 +260,37 @@ class BaseContract(
         t2: date = None
     ) -> List[Account]:
 
-        if t2 is None:
-
-            accounts = [
-                self._get_new_account(account_data_source=account_data_source) for account_data_source
-                in self.data_sources.model_point.accounts if t1 == account_data_source.account_date
+        return (
+            [
+                self._get_new_account(account_data_source=account_data_source)
+                for account_data_source in self.data_sources.model_point.accounts
+                if t1 == account_data_source.account_date
             ]
-
-        else:
-
-            accounts = [
-                self._get_new_account(account_data_source=account_data_source) for account_data_source
-                in self.data_sources.model_point.accounts if t1 < account_data_source.account_date <= t2
+            if t2 is None
+            else [
+                self._get_new_account(account_data_source=account_data_source)
+                for account_data_source in self.data_sources.model_point.accounts
+                if t1 < account_data_source.account_date <= t2
             ]
-
-        return accounts
+        )
 
     def _calc_new_premium(
         self
     ) -> float:
 
-        return sum(
-            [sub_account.premium_new for sub_account in self.accounts]
-        )
+        return sum(sub_account.premium_new for sub_account in self.accounts)
 
     def _calc_account_value(
         self
     ) -> float:
 
-        return sum(
-            [sub_account.account_value for sub_account in self.accounts]
-        )
+        return sum(sub_account.account_value for sub_account in self.accounts)
 
     def _calc_surrender_charge(
         self
     ) -> float:
 
-        return sum(
-            [sub_account.surrender_charge for sub_account in self.accounts]
-        )
+        return sum(sub_account.surrender_charge for sub_account in self.accounts)
 
     def _calc_cash_surrender_value(
         self

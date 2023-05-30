@@ -86,13 +86,7 @@ class IndexedCreditingRate(
 
         value = self.cache['cap'][account_name]
 
-        if isna(value):
-
-            return None
-
-        else:
-
-            return value
+        return None if isna(value) else value
 
     @use_latest_value
     def spread(
@@ -109,13 +103,7 @@ class IndexedCreditingRate(
 
         value = self.cache['spread'][account_name]
 
-        if isna(value):
-
-            return None
-
-        else:
-
-            return value
+        return None if isna(value) else value
 
     @use_latest_value
     def participation_rate(
@@ -132,13 +120,7 @@ class IndexedCreditingRate(
 
         value = self.cache['participation_rate'][account_name]
 
-        if isna(value):
-
-            return None
-
-        else:
-
-            return value
+        return None if isna(value) else value
 
     @use_latest_value
     def floor(
@@ -155,10 +137,4 @@ class IndexedCreditingRate(
 
         value = self.cache['floor'][account_name]
 
-        if isna(value):
-
-            return None
-
-        else:
-
-            return value
+        return None if isna(value) else value

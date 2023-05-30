@@ -62,16 +62,14 @@ class Annuitants(
         # Get list of annuitants
         self.annuitants = []
 
-        for annuitant_data_source in self.data_sources.model_point.annuitants:
-
-            self.annuitants.append(
-                Annuitant(
-                    time_steps=self.time_steps,
-                    data_sources=self.data_sources,
-                    annuitant_data_source=annuitant_data_source
-                )
+        self.annuitants.extend(
+            Annuitant(
+                time_steps=self.time_steps,
+                data_sources=self.data_sources,
+                annuitant_data_source=annuitant_data_source,
             )
-
+            for annuitant_data_source in self.data_sources.model_point.annuitants
+        )
         # Frasierization components
         self.t_q_x = ProjectionValue(
             init_t=self.init_t,

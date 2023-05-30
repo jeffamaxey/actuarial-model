@@ -34,6 +34,4 @@ def convert_decrement_rate(
 
     t_p_x = (1.0 - q_x) ** t
 
-    t_q_x = 1.0 - t_p_x
-
-    return t_q_x
+    return 1.0 - t_p_x

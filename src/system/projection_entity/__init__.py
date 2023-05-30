@@ -67,13 +67,7 @@ class ProjectionEntity(
         self.time_steps: TimeSteps = time_steps
         self.data_sources: DataSourcesRoot = data_sources
 
-        if init_t is None:
-
-            self.init_t = time_steps.t
-
-        else:
-
-            self.init_t = init_t
+        self.init_t = time_steps.t if init_t is None else init_t
 
     @abstractmethod
     def __str__(

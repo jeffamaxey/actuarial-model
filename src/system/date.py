@@ -120,23 +120,9 @@ def calc_whole_years(
     :return: Whole years between two dates.
     """
 
-    delta = relativedelta(
-        dt1=dt1,
-        dt2=dt2
-    )
-
-    if delta:
-
-        if delta.months or delta.days:
-
-            years = delta.years + 1
-
-        else:
-
-            years = delta.years
-
+    if delta := relativedelta(dt1=dt1, dt2=dt2):
+        years = delta.years + 1 if delta.months or delta.days else delta.years
     else:
-
         years = 1
 
     return years

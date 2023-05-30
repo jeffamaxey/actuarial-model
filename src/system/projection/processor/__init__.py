@@ -69,16 +69,13 @@ class ProjectionProcessor(
 
         self.projections = []
 
-        for configured_data_sources in self.data_sources.configured_data_sources():
-
-            self.projections.append(
-                self.projection(
-                    projection_parameters=self.projection_parameters,
-                    data_sources=deepcopy(
-                        configured_data_sources
-                    )
-                )
+        self.projections.extend(
+            self.projection(
+                projection_parameters=self.projection_parameters,
+                data_sources=deepcopy(configured_data_sources),
             )
+            for configured_data_sources in self.data_sources.configured_data_sources()
+        )
 
     @staticmethod
     def _get_type(
@@ -101,9 +98,7 @@ class ProjectionProcessor(
             name=module_path
         )
 
-        class_def = module.__dict__[class_name[1:]]
-
-        return class_def
+        return module.__dict__[class_name[1:]]
 
     @staticmethod
     def run_projection(
@@ -134,9 +129,7 @@ class ProjectionProcessor(
         :return: Nothing.
         """
 
-        Logger().print(
-            message=f'Setting up projection output ...'
-        )
+        Logger().print(message='Setting up projection output ...')
 
         for projection in self.projections:
 

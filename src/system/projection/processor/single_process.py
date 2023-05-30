@@ -39,9 +39,7 @@ class SingleProcessProjectionProcessor(
         :return: Nothing.
         """
 
-        Logger().print(
-            message=f'Running projections ...'
-        )
+        Logger().print(message='Running projections ...')
 
         projections = tqdm(self.projections, desc=r'Progress: ', unit=r' projection(s) ')
 

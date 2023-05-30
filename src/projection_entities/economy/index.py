@@ -103,9 +103,7 @@ class Index(
             t=t2
         )
 
-        pct_change = (next_rate / curr_rate) - 1.0
-
-        return pct_change
+        return (next_rate / curr_rate) - 1.0
 
     def age_index(
         self
